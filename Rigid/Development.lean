@@ -1,5 +1,4 @@
 import Mathlib
-import Rigid.AffinoidAlgebra.QuotientNorm
 import Rigid.TateAlgebra.UniversalProperty
 
 set_option linter.style.header false
