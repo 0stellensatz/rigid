@@ -29,10 +29,11 @@ Reuse `MvPowerSeries.IsRestricted` from mathlib for the underlying restricted po
 2. Construct the normed commutative `K`-algebra structure. **Done** (`TateAlgebra/NormedRing`).
 3. Prove the ultrametric inequality (**done**), multiplicativity of the Gauss norm, and
    completeness.
-4. Prove density of polynomials and the universal property for power-bounded tuples. **Done**
-   (`TateAlgebra/NormedRing`, `TateAlgebra/UniversalProperty`); neither completeness of `K` nor
-   finiteness of the variable set was needed.
-5. Generalize to positive polyradii only after the strict unit-radius API is stable.
+4. Prove density of polynomials and the universal property for tuples of norm at most one.
+   **Done** (`TateAlgebra/NormedRing`, `TateAlgebra/UniversalProperty`); neither completeness of `K`
+   nor finiteness of the variable set was needed.
+5. Extend the universal property from tuples of norm at most one to power-bounded tuples.
+6. Generalize to positive polyradii only after the strict unit-radius API is stable.
 
 The multiplicativity proof is the first substantial algebraic milestone. It will likely need a
 carefully chosen maximal coefficient argument rather than only generic norm estimates.
@@ -57,6 +58,14 @@ algebra. The Banach open mapping theorem then makes the target norm equivalent t
 quotient norm; `exists_equivalent_quotientNorm_presentation_of_isAffinoidAlgebra` records this
 consequence. `IsQuotientNorm` remains available for presentations whose chosen norm is exactly the
 fiberwise infimum.
+
+The rational-localization interface follows the unit-radius construction
+`A⟨T₁, ..., Tₙ⟩ / (gTᵢ - fᵢ)`. `IsRationalDatum g f` records that `g` and the `fᵢ` generate the unit
+ideal. Coordinates are required to be power-bounded rather than to have norm at most one, so the
+universal property is unchanged when the admissible Banach norm is replaced by an equivalent norm.
+The API exposes the canonical base map, coordinates and their relations, invertibility of the
+denominator for rational data, the continuous universal mapping property, and preservation of the
+affinoid condition.
 
 ### 3. Affinoid geometry
 
