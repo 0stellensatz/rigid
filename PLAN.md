@@ -6,7 +6,8 @@ The first pass will treat a complete nontrivially normed field `K` with
 `IsUltrametricDist K` and strict analytic geometry over `K`.
 
 - Tate algebras initially have finitely many variables and unit polyradius.
-- A strict affinoid algebra is presented as a continuous quotient of a Tate algebra.
+- A strict affinoid algebra is a `K`-algebra isomorphic to a quotient of a Tate algebra; no norm or
+  topology is part of the affinoidness predicate.
 - Berkovich points are contractive multiplicative real-valued seminorms extending the norm on `K`.
 - Global spaces and morphisms will be built only after the affinoid theory and its sheaf theorem are
   available.
@@ -27,8 +28,8 @@ Reuse `MvPowerSeries.IsRestricted` from mathlib for the underlying restricted po
 
 1. Define coordinates and the Gauss norm. **Done** (`TateAlgebra/Basic`, `TateAlgebra/GaussNorm`).
 2. Construct the normed commutative `K`-algebra structure. **Done** (`TateAlgebra/NormedRing`).
-3. Prove the ultrametric inequality (**done**), multiplicativity of the Gauss norm, and
-   completeness.
+3. Prove the ultrametric inequality (**done**), completeness (**done**, `TateAlgebra/Complete`;
+   finiteness of the variable set was not needed), and multiplicativity of the Gauss norm.
 4. Prove density of polynomials and the universal property for tuples of norm at most one.
    **Done** (`TateAlgebra/NormedRing`, `TateAlgebra/UniversalProperty`); neither completeness of `K`
    nor finiteness of the variable set was needed.
@@ -53,11 +54,13 @@ its values on the coordinates.
 5. Define rational and Weierstrass localizations and prove their universal properties.
 6. Prove invariance under equivalent admissible Banach norms.
 
-The current `IsAffinoidAlgebra` predicate asks only for a continuous surjection from a finite Tate
-algebra. The Banach open mapping theorem then makes the target norm equivalent to the induced
-quotient norm; `exists_equivalent_quotientNorm_presentation_of_isAffinoidAlgebra` records this
-consequence. `IsQuotientNorm` remains available for presentations whose chosen norm is exactly the
-fiberwise infimum.
+The current `IsAffinoidAlgebra` predicate is algebraic: it asks for an isomorphism to
+`K⟨T₁, ..., Tₙ⟩ / I` and assumes no norm or topology on the target. An `AffinoidPresentation`
+transports the quotient topology and residue norm to the target. The quotient topology is independent
+of the presentation, while the residue norm itself may depend on it. For any complete
+nonarchimedean normed realization, `exists_equivalent_quotientNorm_presentation_of_isAffinoidAlgebra`
+records equivalence with a presentation quotient norm. `IsQuotientNorm` remains available for the
+exact residue norm attached to a chosen presentation.
 
 The rational-localization interface follows the unit-radius construction
 `A⟨T₁, ..., Tₙ⟩ / (gTᵢ - fᵢ)`. `IsRationalDatum g f` records that `g` and the `fᵢ` generate the unit
