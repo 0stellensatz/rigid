@@ -8,7 +8,8 @@ The first pass will treat a complete nontrivially normed field `K` with
 - Tate algebras initially have finitely many variables and unit polyradius.
 - A strict affinoid algebra is a `K`-algebra isomorphic to a quotient of a Tate algebra; no norm or
   topology is part of the affinoidness predicate.
-- Berkovich points are contractive multiplicative real-valued seminorms extending the norm on `K`.
+- The Berkovich spectrum of a normed ring consists of contractive multiplicative real-valued
+  seminorms; it does not depend on a choice of ground field.
 - Global spaces and morphisms will be built only after the affinoid theory and its sheaf theorem are
   available.
 - `Rigid/Challenge.lean` is a standalone specification file. It has only mathlib imports and keeps
@@ -50,7 +51,10 @@ its values on the coordinates.
 1. Define quotient seminorms and prove completeness after quotienting by a closed ideal.
 2. Bundle strict affinoid `K`-algebras and bounded/continuous homomorphisms.
 3. Prove that algebra homomorphisms between affinoid algebras are continuous.
-4. Prove Noetherianity (Tate's theorem).
+4. Prove Noetherianity (Tate's theorem). **Done** (`TateAlgebra/Leading`, `TateAlgebra/Division`,
+   `TateAlgebra/Noetherian`): the division algorithm and standard bases from Kato's Appendix B
+   give `IsNoetherianRing (TateAlgebra K ι)` for finite `ι`, and affinoid algebras inherit
+   Noetherianity through their quotient presentations.
 5. Define rational and Weierstrass localizations and prove their universal properties.
 6. Prove invariance under equivalent admissible Banach norms.
 
@@ -101,11 +105,16 @@ geometric objects.
 
 ### 5. Berkovich spaces
 
-1. Put the evaluation topology on the Berkovich spectrum of an affinoid algebra.
-2. Prove nonemptiness, compactness, and Hausdorffness.
-3. Define completed residue fields and evaluation maps.
-4. Define affinoid domains and analytic functions.
-5. Build Berkovich spaces from affinoid atlases, then define good, strict, Hausdorff, and
+1. Put the evaluation topology on the Berkovich spectrum of a normed ring. **Done**
+   (`Berkovich/Spectrum`).
+2. Prove nonemptiness, compactness, and Hausdorffness. Compactness and Hausdorffness are **done**
+   for every normed ring; nonemptiness for nonzero complete commutative normed rings remains open.
+3. Develop pointwise evaluation, prime kernels, and contravariance. The basic evaluation, kernel,
+   and norm-nonincreasing pullback APIs are **done**; nonarchimedeanity of points over a
+   nonarchimedean commutative normed ring remains a target.
+4. Define completed residue fields and evaluation maps.
+5. Define affinoid domains and analytic functions.
+6. Build Berkovich spaces from affinoid atlases, then define good, strict, Hausdorff, and
    paracompact objects and analytic morphisms.
 
 ### 6. Comparison
@@ -168,6 +177,7 @@ replace only the corresponding sorried Development body.
 
 ## Near-term milestone
 
-Implement the strict Tate algebra through completeness and its universal property. This validates
-that mathlib's restricted multivariate power series are the right foundation before introducing
-quotients, sites, or global spaces.
+Finish the elementary Berkovich spectrum by proving that bounded multiplicative seminorms over a
+nonarchimedean normed ring are nonarchimedean and that the spectrum of a nonzero complete
+commutative normed ring is nonempty. In parallel, continue the affinoid quotient and rational
+localization foundations needed for analytic domains.
